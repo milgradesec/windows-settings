@@ -214,6 +214,7 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" )) {
     New-Item -Path  "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"  -Force | Out-Null
 }
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -Value 0
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowCrossDeviceClipboard" -Value 0
 
 #################################
 # Disable Application Telemetry #
