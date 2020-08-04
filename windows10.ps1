@@ -782,5 +782,11 @@ else {
     }
 }
 
-# Clean Exploit Mitigations
+#################
+# Exploit Guard #
+#################
+Invoke-WebRequest -Uri "https://dl.paesa.es/krypton/config/stable/Settings.xml" -OutFile "$Env:TEMP\ExploitSettings.xml"
+Set-ProcessMitigation -PolicyFilePath "$Env:TEMP\ExploitSettings.xml"
+
+# Clean Old Exploit Mitigations
 #reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\example.exe" /f
