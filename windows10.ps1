@@ -594,7 +594,6 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\Cookies")) {
 }
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\Cookies" -Name "RejectTracker" -Value 1
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\Cookies" -Name "AcceptThirdParty" -Value "never"
-Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\Cookies" -Name "AcceptThirdParty "
 
 # Block Flash Player
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\FlashPlugin")) {
