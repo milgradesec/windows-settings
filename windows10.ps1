@@ -785,7 +785,7 @@ else {
 #################
 # Exploit Guard #
 #################
-Invoke-WebRequest -Uri "https://dl.paesa.es/windows/ExploitSettings.xml" -OutFile "$Env:TEMP\ExploitSettings.xml"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/milgradesec/windows-settings/master/ExploitGuard/ExploitSettings.xml" -OutFile "$Env:TEMP\ExploitSettings.xml"
 Set-ProcessMitigation -PolicyFilePath "$Env:TEMP\ExploitSettings.xml"
 
 # Clean Old Exploit Mitigations
