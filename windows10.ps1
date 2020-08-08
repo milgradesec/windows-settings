@@ -661,6 +661,12 @@ Add-MpPreference -AttackSurfaceReductionRules_Ids D1E49AAC-8F56-4280-B9BA-993A6D
 # Block executable files from running unless they meet a prevalence, age, or trusted list criteria
 Add-MpPreference -AttackSurfaceReductionRules_Ids 01443614-CD74-433A-B99E-2ECDC07BFC25 -AttackSurfaceReductionRules_Actions Disabled
 
+#################
+# Exploit Guard #
+#################
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/milgradesec/windows-settings/master/ExploitGuard/ExploitSettings.xml" -OutFile "$Env:TEMP\ExploitSettings.xml"
+Set-ProcessMitigation -PolicyFilePath "$Env:TEMP\ExploitSettings.xml"
+
 ##############################
 # Configure Windows Firewall #
 ##############################
@@ -780,12 +786,6 @@ else {
         Get-NetAdapter  -Name "Wi*" | Set-DnsClientServerAddress -ResetServerAddresses
     }
 }
-
-#################
-# Exploit Guard #
-#################
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/milgradesec/windows-settings/master/ExploitGuard/ExploitSettings.xml" -OutFile "$Env:TEMP\ExploitSettings.xml"
-Set-ProcessMitigation -PolicyFilePath "$Env:TEMP\ExploitSettings.xml"
 
 # Clean Old Exploit Mitigations
 #reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\example.exe" /f
