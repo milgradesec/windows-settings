@@ -470,6 +470,15 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "DnsOverHt
 
 # Configure TLS
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "SSLVersionMin" -Value "tls1.2"
+If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\TLSCipherSuiteDenyList")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\TLSCipherSuiteDenyList" -Force | Out-Null
+}
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\TLSCipherSuiteDenyList" -Name "1" -Value "0x0035"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\TLSCipherSuiteDenyList" -Name "2" -Value "0x002f"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\TLSCipherSuiteDenyList" -Name "3" -Value "0x009d"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\TLSCipherSuiteDenyList" -Name "4" -Value "0x009c"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\TLSCipherSuiteDenyList" -Name "5" -Value "0xc014"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\TLSCipherSuiteDenyList" -Name "6" -Value "0xc013"
 
 # Enable tracking prevention
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "TrackingPrevention" -Value 3
