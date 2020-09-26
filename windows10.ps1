@@ -524,7 +524,7 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Google\Chrome")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Force | Out-Null
 }
 # Enable DNS over HTTPS
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DnsOverHttpsMode" -Value "automatic"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DnsOverHttpsMode" -Value "secure"
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DnsOverHttpsTemplates" -Value "https://dns.paesa.es/dns-query"
 
 # Configure TLS
