@@ -784,16 +784,3 @@ if ([Environment]::Is64BitProcess) {
         Disable-ScheduledTask -TaskName "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" | Out-Null
     }
 }
-
-if ([Environment]::Is64BitProcess) {
-    If (!(Test-RegistryValue -Path "HKLM:\SOFTWARE\WOW6432Node\Krypton" -Value "ChangeDNS")) {
-        Get-NetAdapter  -Name "Ether*" | Set-DnsClientServerAddress -ResetServerAddresses
-        Get-NetAdapter  -Name "Wi*" | Set-DnsClientServerAddress -ResetServerAddresses
-    }
-} 
-else {
-    If (!(Test-RegistryValue -Path "HKLM:\SOFTWARE\Krypton" -Value "ChangeDNS")) {
-        Get-NetAdapter  -Name "Ether*" | Set-DnsClientServerAddress -ResetServerAddresses
-        Get-NetAdapter  -Name "Wi*" | Set-DnsClientServerAddress -ResetServerAddresses
-    }
-}
