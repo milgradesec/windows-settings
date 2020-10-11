@@ -761,3 +761,10 @@ If (!(Get-NetFirewallRule -DisplayName "Bloquear cmd.exe")) {
 #Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\ProgramDataUpdater" | Out-Null
 #Disable-ScheduledTask -TaskName "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" | Out-Null
 #Disable-ScheduledTask -TaskName "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" | Out-Null
+
+##################
+# Remove Krypton #
+##################
+Remove-Item "C:/Program Files/Krypton" -Recurse
+Unregister-ScheduledTask -TaskName "KryptonUpdate"
+Unregister-ScheduledTask -TaskName "KryptonUpgrade"
