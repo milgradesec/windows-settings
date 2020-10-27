@@ -543,6 +543,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "BlockThird
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DefaultPopupsSetting" -Value 2
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "AbusiveExperienceInterventionEnforce" -Value 1
 
+# Block insecure content
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DefaultInsecureContentSetting" -Value 2
+
 # Set authentication schemes
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "AuthSchemes" -Value "ntlm,negotiate"
 
