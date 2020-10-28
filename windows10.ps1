@@ -333,6 +333,11 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Par
 #######################################
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "LocalAccountTokenFilterPolicy" -Value 0
 
+##################################
+# Configure RDP Encryption Level #
+##################################
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" -Name "MinEncryptionLevel" -Value 3
+
 #############################################
 # Enable NLA (Network Level Authentication) #
 #############################################
