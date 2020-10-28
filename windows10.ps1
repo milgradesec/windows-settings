@@ -657,6 +657,14 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\Extensions\Locked")) {
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\Extensions\Install" -Name "1" -Value "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\Extensions\Locked" -Name "1" -Value "uBlock0@raymondhill.net"
 
+#################
+# Zoom Meetings #
+#################
+If (!(Test-Path "HKLM:\Software\Policies\Zoom\Zoom Meetings\General")) {
+    New-Item -Path "HKLM:\Software\Policies\Zoom\Zoom Meetings\General" -Force | Out-Null
+}
+Set-ItemProperty -Path "HKLM:\Software\Policies\Zoom\Zoom Meetings\General" -Name "BlockUntrustedSSLCert" -Value 1
+
 ####################
 # Windows Defender #
 ####################
