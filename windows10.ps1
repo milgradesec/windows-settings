@@ -791,10 +791,3 @@ If (!(Get-NetFirewallRule -DisplayName "Bloquear cmd.exe")) {
     New-NetFirewallRule -DisplayName "Bloquear cmd.exe"  -Direction Outbound -Program "C:\WINDOWS\system32\cmd.exe" -Action Block | Out-Null
     New-NetFirewallRule -DisplayName "Bloquear cmd.exe"  -Direction Outbound -Program "C:\WINDOWS\SysWOW64\cmd.exe" -Action Block | Out-Null
 }
-
-##################
-# Remove Krypton #
-##################
-Remove-Item "C:/Program Files/Krypton" -Recurse -Force
-Unregister-ScheduledTask -TaskName "KryptonUpdate"
-Unregister-ScheduledTask -TaskName "KryptonUpgrade"
