@@ -782,12 +782,11 @@ If (!(Get-NetFirewallRule -DisplayName "Bloquear expand.exe")) {
     New-NetFirewallRule -DisplayName "Bloquear expand.exe"  -Direction Outbound -Program "C:\Windows\SysWOW64\expand.exe" -Action Block | Out-Null
 }
 
-If (!(Get-NetFirewallRule -DisplayName "Bloquear powershell.exe")) {
-    New-NetFirewallRule -DisplayName "Bloquear powershell.exe"  -Direction Outbound -Program "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Action Block | Out-Null
-    New-NetFirewallRule -DisplayName "Bloquear powershell.exe"  -Direction Outbound -Program "C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe" -Action Block | Out-Null
-}
-
 If (!(Get-NetFirewallRule -DisplayName "Bloquear cmd.exe")) {
     New-NetFirewallRule -DisplayName "Bloquear cmd.exe"  -Direction Outbound -Program "C:\WINDOWS\system32\cmd.exe" -Action Block | Out-Null
     New-NetFirewallRule -DisplayName "Bloquear cmd.exe"  -Direction Outbound -Program "C:\WINDOWS\SysWOW64\cmd.exe" -Action Block | Out-Null
+}
+
+If (Get-NetFirewallRule -DisplayName "Bloquear powershell.exe") {
+    Remove-NetFirewallRule -DisplayName "Bloquear powershell.exe" | Out-Null
 }
