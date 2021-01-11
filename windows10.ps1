@@ -721,6 +721,12 @@ Add-MpPreference -AttackSurfaceReductionRules_Ids 01443614-CD74-433A-B99E-2ECDC0
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/milgradesec/windows-settings/master/ExploitGuard/ExploitSettings.xml" -OutFile "$Env:TEMP\ExploitSettings.xml"
 Set-ProcessMitigation -PolicyFilePath "$Env:TEMP\ExploitSettings.xml"
 
+reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\soffice.exe" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\nextcloud.exe" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\git.exe" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sh.exe" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\diff.exe" /f
+
 ##############################
 # Configure Windows Firewall #
 ##############################
