@@ -1,1 +1,2 @@
 scp windows10.ps1 ubuntu@ssh.paesa.es:/home/ubuntu/www/dlserver/krypton/configurarWindows10.ps1
+scp .\ExploitGuard\ExploitSettings.xml ubuntu@ssh.paesa.es:/home/ubuntu/www/dlserver/krypton/config/stable/Settings.xml
