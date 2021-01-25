@@ -16,11 +16,12 @@ Get-ChildItem -Path $path -Recurse | Where-Object { $_.GetValue($name) -ne $valu
     Set-ItemProperty -Path ('{0}\{1}' -f $path, $_.PSChildName) -Name $name -Value $value 
 }
 
+## REVERTED
 ###################################################
 # Disable Web Proxy Autodiscovery Protocol (WPAD) #
 ###################################################
 If (Test-Path "HKLM:\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc") {
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc" -Name "Start" -Value 4
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc" -Name "Start" -Value 3
 }
 
 ##########################
