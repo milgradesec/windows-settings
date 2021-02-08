@@ -101,13 +101,13 @@ If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANN
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168" -Name "Enabled" -Value 0
 
 # Disable weak cipher suites
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_GCM_SHA384"
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_GCM_SHA256"
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA256"
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA256"
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA"
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA"
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_3DES_EDE_CBC_SHA"
+Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_GCM_SHA384" | Out-Null
+Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_GCM_SHA256" | Out-Null
+Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA256" | Out-Null
+Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA256" | Out-Null
+Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA" | Out-Null
+Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA" | Out-Null
+Disable-TlsCipherSuite -Name "TLS_RSA_WITH_3DES_EDE_CBC_SHA" | Out-Null
 
 #####################
 # Internet Settings #
