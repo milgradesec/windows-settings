@@ -879,3 +879,10 @@ Register-ScheduledTask `
     -User "System" `
     -TaskName "Update System Configuration" `
     -Description "Applies the github.com/milgradesec/windows-settings custom settings for Windows 10"
+
+##################
+# Remove Krypton #
+##################
+Remove-Item "C:/Program Files/Krypton" -Recurse -Force
+Unregister-ScheduledTask -TaskName "KryptonUpdate"
+Unregister-ScheduledTask -TaskName "KryptonUpgrade"
