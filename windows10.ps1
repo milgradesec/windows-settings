@@ -708,10 +708,8 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\Cookies" -Name "
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\Cookies" -Name "AcceptThirdParty" -Value "never"
 
 # Block Flash Player
-If (!(Test-Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\FlashPlugin")) {
-    New-Item -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\FlashPlugin" -Force | Out-Null
-}
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\FlashPlugin" -Name "Default" -Value 0
+Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\FlashPlugin" -Name "Default"
+Remove-Item -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\FlashPlugin" -Force | Out-Null
 
 # Block popups
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\PopupBlocking")) {
