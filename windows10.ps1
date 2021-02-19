@@ -259,6 +259,11 @@ If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth
 }
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth" -Name "AllowAdvertising" -Value 0
 
+############################################
+# Set Microsoft Accounts Optional for Apps #
+############################################
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "MSAOptional" -Value 1
+
 #####################################################
 # Disable Suggested Apps and Automatic Installation #
 #####################################################
