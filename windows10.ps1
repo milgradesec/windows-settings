@@ -297,14 +297,6 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" )) {
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -Value 0
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowCrossDeviceClipboard" -Value 0
 
-#################################
-# Disable Application Telemetry #
-#################################
-If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat")) {
-    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Force | Out-Null
-}
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Name "AITEnable" -Value 0
-
 ###########################################################
 # Disable Windows Customer Experience Improvement Program #
 ###########################################################
