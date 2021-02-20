@@ -288,14 +288,12 @@ If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\System"))
 }
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\System" -Name "AllowExperimentation" -Value 0
 
+# REVERTED
 #############################
 # Disable Clipboard History #
 #############################
-If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" )) {
-    New-Item -Path  "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"  -Force | Out-Null
-}
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory" -Value 0
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowCrossDeviceClipboard" -Value 0
+Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowClipboardHistory"
+Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "AllowCrossDeviceClipboard"
 
 #################################
 # Disable Application Telemetry #
