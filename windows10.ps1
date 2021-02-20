@@ -51,6 +51,14 @@ else {
 Set-Service -Name ssh-agent -StartupType Automatic
 Start-Service -Name ssh-agent
 
+###########################
+# Disable NTVDM Subsystem #
+###########################
+If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Force | Out-Null
+}
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Name "VDMDisallowed" -Value 1
+
 ##########################
 # Configure TCP/IP Stack #
 ##########################
