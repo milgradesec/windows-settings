@@ -750,6 +750,7 @@ Set-MpPreference -PUAProtection Enabled
 Set-MpPreference -CloudBlockLevel High
 Set-MpPreference -SubmitSamplesConsent SendSafeSamples
 Set-MpPreference -CloudExtendedTimeout 50
+Set-MpPreference -SignatureUpdateInterval 8
 
 # Configure EarlyLaunch antimalware policy
 if (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Policies\EarlyLaunch")) {
