@@ -13,3 +13,4 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 - <https://github.com/Disassembler0/Win10-Initial-Setup-Script>
 - <https://www.stigviewer.com>
 - <https://admx.help/>
+- <https://github.com/simeononsecurity/Windows-Optimize-Harden-Debloat>
