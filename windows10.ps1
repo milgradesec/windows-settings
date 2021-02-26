@@ -107,6 +107,12 @@ If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANN
 }
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168" -Name "Enabled" -Value 0
 
+# Disable Diffie-Hellman exchange
+If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman")) {
+    New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman" -Force | Out-Null
+}
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman" -Name "Enabled" -Value 0
+
 # Disable weak cipher suites
 Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_GCM_SHA384" | Out-Null
 Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_GCM_SHA256" | Out-Null
