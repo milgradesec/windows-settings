@@ -777,6 +777,9 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Policies\EarlyLaunch" -Na
 # Configure SmartScreen
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableSmartScreen" -Value 2
 
+# Enable process sandbox
+setx /M MP_FORCE_USE_SANDBOX 1
+
 # Block executable content from email client and webmail
 Add-MpPreference -AttackSurfaceReductionRules_Ids BE9BA2D9-53EA-4CDC-84E5-9B1EEEE46550 -AttackSurfaceReductionRules_Actions Enabled
 # Block Adobe Reader from creating child processes
