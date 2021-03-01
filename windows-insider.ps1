@@ -21,3 +21,6 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\AppV\CEIP" -Name "CEIP
 
 # Disable Auto-Update Settings
 Disable-ScheduledTask -TaskName "Update System Configuration"
+
+# Set Exploit Mitigations
+Set-ProcessMitigation -PolicyFilePath .\ExploitGuard\InsiderSettings.xml
