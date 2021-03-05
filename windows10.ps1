@@ -420,29 +420,6 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers" -
 #########################
 Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager" -Name "SafeDllSearchMode" -Value 1
 
-##################################
-# Disable Flash Player in Office #
-##################################
-If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\MicrosoftEdge\ActiveX Compatibility\{D27CDB6E-AE6D-11cf-96B8-444553540000}")) {
-    New-Item -Path "HKLM:\SOFTWARE\Microsoft\MicrosoftEdge\ActiveX Compatibility\{D27CDB6E-AE6D-11cf-96B8-444553540000}" -Force | Out-Null
-}
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\MicrosoftEdge\ActiveX Compatibility\{D27CDB6E-AE6D-11cf-96B8-444553540000}" -Name "Compatibility Flags" -Value 400
-
-If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\ActiveX Compatibility\{D27CDB6E-AE6D-11cf-96B8-444553540000}")) {
-    New-Item -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\ActiveX Compatibility\{D27CDB6E-AE6D-11cf-96B8-444553540000}" -Force | Out-Null
-}
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Internet Explorer\ActiveX Compatibility\{D27CDB6E-AE6D-11cf-96B8-444553540000}" -Name "Compatibility Flags" -Value 400
-
-If (!(Test-Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Internet Explorer\ActiveX Compatibility\{D27CDB6E-AE6D-11cf-96B8-444553540000}")) {
-    New-Item -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Internet Explorer\ActiveX Compatibility\{D27CDB6E-AE6D-11cf-96B8-444553540000}" -Force | Out-Null
-}
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Internet Explorer\ActiveX Compatibility\{D27CDB6E-AE6D-11cf-96B8-444553540000}" -Name "Compatibility Flags" -Value 400
-
-If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Office\Common\COM\Compatibility\{D27CDB6E-AE6D-11CF-96B8-444553540000}")) {
-    New-Item -Path "HKLM:\SOFTWARE\Microsoft\Office\Common\COM\Compatibility\{D27CDB6E-AE6D-11CF-96B8-444553540000}" -Force | Out-Null
-}
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Office\Common\COM\Compatibility\{D27CDB6E-AE6D-11CF-96B8-444553540000}" -Name "Compatibility Flags" -Value 400
-
 ##########################
 # Disable WinHelp Macros #
 ##########################
