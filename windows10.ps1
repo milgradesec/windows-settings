@@ -38,25 +38,31 @@ If (Test-Path "HKLM:\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc") {
 # Disable SMBv1 Protocol #
 ##########################
 Write-Output "Disabling SMBv1 Protocol..."
-Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'SMB1Protocol' -ErrorAction SilentlyContinue | Out-Null
+Start-Job -ScriptBlock {
+    Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'SMB1Protocol' -ErrorAction SilentlyContinue
+} | Out-Null
 
 ########################
 # Disable PowerShellv2 #
 ########################
 Write-Output "Disabling PowerShellV2..."
-Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'MicrosoftWindowsPowerShellV2' -ErrorAction SilentlyContinue | Out-Null
-Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'MicrosoftWindowsPowerShellV2Root' -ErrorAction SilentlyContinue | Out-Null
+Start-Job -ScriptBlock {
+    Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'MicrosoftWindowsPowerShellV2' -ErrorAction SilentlyContinue
+    Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'MicrosoftWindowsPowerShellV2Root' -ErrorAction SilentlyContinue
+} | Out-Null
 
 #############################
 # Disable Internet Explorer #
 #############################
 Write-Output "Disabling Internet Explorer..."
-if ([Environment]::Is64BitProcess) {
-    Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName "Internet-Explorer-Optional-amd64" -ErrorAction SilentlyContinue | Out-Null
-}
-else {
-    Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName "Internet-Explorer-Optional-x86" -ErrorAction SilentlyContinue | Out-Null
-}
+Start-Job -ScriptBlock {
+    if ([Environment]::Is64BitProcess) {
+        Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName "Internet-Explorer-Optional-amd64" -ErrorAction SilentlyContinue
+    }
+    else {
+        Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName "Internet-Explorer-Optional-x86" -ErrorAction SilentlyContinue
+    }
+} | Out-Null
 
 ############################
 # Enable ssh-agent Service #
