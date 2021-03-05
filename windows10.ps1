@@ -512,9 +512,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\policies\microsoft\office\12.0\common" -N
 ##########################
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1
 
-#################
-# Configure UAC #
-#################
+#########################
+# Set UAC Level to High #
+#########################
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 2
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Value 1
 
