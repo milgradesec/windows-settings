@@ -9,6 +9,7 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 ########################################################
 # Disable LLMNR (Link-Local Multicast Name Resolution) #
 ########################################################
+Write-Output "Disabling Link-Local Multicast Name Resolution..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" -Force | Out-Null
 }
@@ -17,6 +18,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" 
 ############################
 # Disable NetBIOS Protocol #
 ############################
+Write-Output "Disabling NetBIOS Protocol..."
 $path = 'HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces'
 $name = 'NetbiosOptions'
 $value = 2
@@ -27,6 +29,7 @@ Get-ChildItem -Path $path -Recurse | Where-Object { $_.GetValue($name) -ne $valu
 ###################################################
 # Disable Web Proxy Autodiscovery Protocol (WPAD) #
 ###################################################
+Write-Output "Disabling Web Proxy Autodiscovery Protocol..."
 If (Test-Path "HKLM:\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc") {
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc" -Name "Start" -Value 0
 }
@@ -34,17 +37,20 @@ If (Test-Path "HKLM:\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc") {
 ##########################
 # Disable SMBv1 Protocol #
 ##########################
+Write-Output "Disabling SMBv1 Protocol..."
 Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'SMB1Protocol' -ErrorAction SilentlyContinue | Out-Null
 
 ########################
 # Disable PowerShellv2 #
 ########################
+Write-Output "Disabling PowerShellV2..."
 Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'MicrosoftWindowsPowerShellV2' -ErrorAction SilentlyContinue | Out-Null
 Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'MicrosoftWindowsPowerShellV2Root' -ErrorAction SilentlyContinue | Out-Null
 
 #############################
 # Disable Internet Explorer #
 #############################
+Write-Output "Disabling Internet Explorer..."
 if ([Environment]::Is64BitProcess) {
     Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName "Internet-Explorer-Optional-amd64" -ErrorAction SilentlyContinue | Out-Null
 }
@@ -55,12 +61,14 @@ else {
 ############################
 # Enable ssh-agent Service #
 ############################
+Write-Output "Enabling SSH Agent Service..."
 Set-Service -Name ssh-agent -StartupType Automatic
 Start-Service -Name ssh-agent
 
 ###########################
 # Disable NTVDM Subsystem #
 ###########################
+Write-Output "Disabling NTVDM Subsystem..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Force | Out-Null
 }
@@ -69,6 +77,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Na
 ##########################
 # Configure TCP/IP Stack #
 ##########################
+Write-Output "Configuring TCP/IP Stack..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "SynAttackProtect" -Value 1
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "DisableIPSourceRouting" -Value 2
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" -Name "DisableIPSourceRouting" -Value 2
