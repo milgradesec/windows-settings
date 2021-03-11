@@ -744,6 +744,29 @@ If (!(Test-Path "HKLM:\Software\Policies\Zoom\Zoom Meetings\General")) {
 }
 Set-ItemProperty -Path "HKLM:\Software\Policies\Zoom\Zoom Meetings\General" -Name "BlockUntrustedSSLCert" -Value 1
 
+############################
+# Disable NVIDIA Telemetry #
+############################
+Get-ScheduledTask -TaskName "NvTmRep_CrashReport*" | Disable-ScheduledTask
+
+New-Item -Path "HKLM:\Software\NVIDIA Corporation\NvControlPanel2\Client" -Force | Out-Null
+Set-ItemProperty -Path "HKLM:\Software\NVIDIA Corporation\NvControlPanel2\Client" -Name "OptInOrOutPreference" -Value 0
+
+#Set-ItemProperty -Path "HKLM:\Software\NVIDIA Corporation\Global\FTS" -Name EnableRID44231 -Value 0
+#Set-ItemProperty -Path "HKLM:\Software\NVIDIA Corporation\Global\FTS" -Name EnableRID64640 -Value 0
+#Set-ItemProperty -Path "HKLM:\Software\NVIDIA Corporation\Global\FTS" -Name EnableRID66610 -Value 0
+#New-Item -Path "HKLM:\Software\NVIDIA Corporation\NvControlPanel2\Client" -Force
+#Set-ItemProperty -Path "HKLM:\Software\NVIDIA Corporation\NvControlPanel2\Client" -Name OptInOrOutPreference -Type "DWORD" -Value 0 -Force
+#Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\NvTelemetryContainer" -Name Start -Type "DWORD" -Value 4 -Force
+#Set-ItemProperty -Path "HKLM:\Software\NVIDIA Corporation\Global\Startup\SendTelemetryData" -Name 0 -Type "DWORD" -Value 0 -Force
+#Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\Startup" -Name "SendTelemetryData" -Type "DWORD" -Value 0 -Force
+#Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\NvTelemetryContainer" -Name "Start" -Type "DWORD" -Value 4 -Force
+#Delete NVIDIA residual telemetry files
+#Remove-Item -Recurse $env:systemdrive\System32\DriverStore\FileRepository\NvTelemetry*.dll
+#Remove-Item -Recurse "$env:ProgramFiles\NVIDIA Corporation\NvTelemetry" | Out-Null
+#Stop-Service NvTelemetryContainer
+#Set-Service NvTelemetryContainer -StartupType Disabled
+
 ####################
 # Windows Defender #
 ####################
