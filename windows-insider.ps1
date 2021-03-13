@@ -24,3 +24,6 @@ Disable-ScheduledTask -TaskName "Update System Configuration"
 
 # Set Exploit Mitigations
 Set-ProcessMitigation -PolicyFilePath .\ExploitGuard\InsiderSettings.xml
+
+# Allow Windows Defender to submit files without asking
+Set-MpPreference -SubmitSamplesConsent SendAllSamples
