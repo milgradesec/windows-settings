@@ -28,3 +28,6 @@ Set-ProcessMitigation -PolicyFilePath InsiderSettings.xml
 
 # Allow Windows Defender to submit files without asking
 Set-MpPreference -SubmitSamplesConsent SendAllSamples
+
+# Disable Windows Defender Sandbox
+setx /M MP_FORCE_USE_SANDBOX 0
