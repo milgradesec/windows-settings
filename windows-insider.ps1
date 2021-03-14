@@ -23,7 +23,8 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\AppV\CEIP" -Name "CEIP
 Disable-ScheduledTask -TaskName "Update System Configuration"
 
 # Set Exploit Mitigations
-Set-ProcessMitigation -PolicyFilePath .\ExploitGuard\InsiderSettings.xml
+Set-Location .\ExploitGuard
+Set-ProcessMitigation -PolicyFilePath InsiderSettings.xml
 
 # Allow Windows Defender to submit files without asking
 Set-MpPreference -SubmitSamplesConsent SendAllSamples
