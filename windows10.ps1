@@ -533,16 +533,6 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 2
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Value 1
 
-# DEPRECATED
-#####################
-# Internet Explorer #
-#####################
-If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer")) {
-    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer" -Force | Out-Null
-}
-# Block Flash Player
-Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer" -Name "DisableFlashInIE"
-
 ##################
 # Microsoft Edge #
 ##################
@@ -624,9 +614,6 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DnsOverHtt
 
 # Configure TLS
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "SSLVersionMin" -Value "tls1.2"
-
-# Block Flash Player
-Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DefaultPluginsSetting"
 
 # Block third-party cookies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "BlockThirdPartyCookies" -Value 1
@@ -760,10 +747,6 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\Cookies")) {
 }
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\Cookies" -Name "RejectTracker" -Value 1
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\Cookies" -Name "AcceptThirdParty" -Value "never"
-
-# Block Flash Player
-Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\FlashPlugin" -Name "Default"
-Remove-Item -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\FlashPlugin" -Force | Out-Null
 
 # Block popups
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox\PopupBlocking")) {
@@ -911,10 +894,6 @@ If (!(Get-NetFirewallRule -DisplayName "Bloquear expand.exe")) {
 If (!(Get-NetFirewallRule -DisplayName "Bloquear cmd.exe")) {
     New-NetFirewallRule -DisplayName "Bloquear cmd.exe"  -Direction Outbound -Program "C:\WINDOWS\system32\cmd.exe" -Action Block | Out-Null
     New-NetFirewallRule -DisplayName "Bloquear cmd.exe"  -Direction Outbound -Program "C:\WINDOWS\SysWOW64\cmd.exe" -Action Block | Out-Null
-}
-
-If (Get-NetFirewallRule -DisplayName "Bloquear powershell.exe") {
-    Remove-NetFirewallRule -DisplayName "Bloquear powershell.exe" | Out-Null
 }
 
 #########################
