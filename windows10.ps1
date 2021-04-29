@@ -231,6 +231,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Na
 ################################################
 # Disable System Telemetry and Data Collection #
 ################################################
+Write-Output "Disabling System Telemetry..."
 If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection")) {
     New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Force | Out-Null
 }
@@ -247,6 +248,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
 ####################################
 # Disable Handwriting Data Sharing #
 ####################################
+Write-Output "Disable Handwriting Data Sharing..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\TabletPC")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\TabletPC" -Force | Out-Null
 }
@@ -272,6 +274,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\InputPersonalization" 
 #####################################
 # Disable Online Speech Recognition #
 #####################################
+Write-Output "Disabling Online Speech Recognition..."
 If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Speech_OneCore\Preferences")) {
     New-Item -Path "HKLM:\SOFTWARE\Microsoft\Speech_OneCore\Preferences" -Force | Out-Null
 }
@@ -280,6 +283,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Speech_OneCore\Preferences" -Na
 ##########################################
 # Disable Windows Search Location Access #
 ##########################################
+Write-Output "Disabling Windows Search Location Access..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
 }
@@ -288,11 +292,13 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search
 ###################
 # Disable Cortana #
 ###################
+Write-Output "Disabling Cortana..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -Value 0
 
 ######################
 # Disable Web Search #
 ######################
+Write-Output "Disabling Windows Web Search..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
 }
@@ -316,6 +322,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\Bl
 #######################
 # Disable Wi-Fi Sense #
 #######################
+Write-Output "Disabling Wi-Fi Sense..."
 If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting")) {
     New-Item -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Force | Out-Null
 }
@@ -330,6 +337,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 #####################################################
 # Disable Suggested Apps and Automatic Installation #
 #####################################################
+Write-Output "Disabling Automatic App Instalations..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
     New-Item -Path  "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Force | Out-Null
 }
@@ -351,6 +359,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Messaging" -Na
 #####################################
 # Disable Microsoft Experimentation #
 #####################################
+Write-Output "Disabling Microsoft Experimentation..."
 If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\System")) {
     New-Item -Path  "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\System" -Force | Out-Null
 }
@@ -359,6 +368,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\Sy
 #############################
 # Disable Clipboard History #
 #############################
+Write-Output "Disabling Clipboard History..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" )) {
     New-Item -Path  "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"  -Force | Out-Null
 }
@@ -391,6 +401,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Messenger\Client" -Nam
 ###############################
 # Disable Inventory Collector #
 ###############################
+Write-Output "Disabling Inventory Collector..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat")) {
     New-Item -Path  "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Force | Out-Null
 }
@@ -399,6 +410,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Na
 #################################
 # Disable User Activity History #
 #################################
+Write-Output "Disabling Activity History..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" )) {
     New-Item -Path  "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"  -Force | Out-Null
 }
@@ -440,6 +452,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\W
 ################
 # Enable SEHOP #
 ################
+Write-Output "Enabling SEHOP..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" -Name "DisableExceptionChainValidation" -Value 0
 
 #######################################
@@ -455,6 +468,7 @@ If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters")) {
 }
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters" -Name "LDAPServerIntegrity" -Value 2
 
+Write-Output "Configuring SMB..."
 #########################################
 # Refuse SMB Unencrypted Authenticacion #
 #########################################
@@ -485,11 +499,13 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers" -
 #########################
 # Enable DLL SafeSearch #
 #########################
+Write-Output "Enabling DLL SafeSearch..."
 Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager" -Name "SafeDllSearchMode" -Value 1
 
 ##########################
 # Disable WinHelp Macros #
 ##########################
+Write-Output "Disabling WinHelp Macros..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Winhelp")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Winhelp" -Force | Out-Null
 }
@@ -530,12 +546,14 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name
 #########################
 # Set UAC Level to High #
 #########################
+Write-Output "Configuring UAC Level..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 2
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Value 1
 
 ##################
 # Microsoft Edge #
 ##################
+Write-Output "Configuring Microsoft Edge..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Force | Out-Null
 }
@@ -602,6 +620,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallF
 #################
 # Google Chrome #
 #################
+Write-Output "Configuring Google Chrome..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Google\Chrome")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Force | Out-Null
 }
@@ -651,6 +670,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallFo
 #################
 # Brave Browser #
 #################
+Write-Output "Configuring Bave Browser..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Force | Out-Null
 }
@@ -700,6 +720,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionIns
 ###################
 # Mozilla Firefox #
 ###################
+Write-Output "Configuring Mozilla Firefox..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Mozilla\Firefox" -Force | Out-Null
 }
@@ -773,6 +794,7 @@ Set-ItemProperty -Path "HKLM:\Software\Policies\Zoom\Zoom Meetings\General" -Nam
 ####################
 # Windows Defender #
 ####################
+Write-Output "Configuring Windows Defender..."
 Set-MpPreference -PUAProtection Enabled
 Set-MpPreference -CloudBlockLevel High
 Set-MpPreference -SubmitSamplesConsent SendSafeSamples
@@ -823,6 +845,7 @@ Add-MpPreference -AttackSurfaceReductionRules_Ids 01443614-CD74-433A-B99E-2ECDC0
 #################
 # Exploit Guard #
 #################
+Write-Output "Configuring Windows Exploit Guard..."
 #reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\example.exe" /f
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/milgradesec/windows-settings/master/ExploitGuard/ExploitSettings.xml" -OutFile "$Env:TEMP\ExploitSettings.xml"
 Set-ProcessMitigation -PolicyFilePath "$Env:TEMP\ExploitSettings.xml"
@@ -830,6 +853,7 @@ Set-ProcessMitigation -PolicyFilePath "$Env:TEMP\ExploitSettings.xml"
 ##############################
 # Configure Windows Firewall #
 ##############################
+Write-Output "Configuring Windows Firewall..."
 If (!(Get-NetFirewallRule -DisplayName "Bloquear rundll32.exe")) {
     New-NetFirewallRule -DisplayName "Bloquear rundll32.exe"  -Direction Outbound -Program "C:\Windows\System32\rundll32.exe" -Action Block | Out-Null
     New-NetFirewallRule -DisplayName "Bloquear rundll32.exe"  -Direction Outbound -Program "C:\Windows\syswOW64\rundll32.exe" -Action Block | Out-Null
