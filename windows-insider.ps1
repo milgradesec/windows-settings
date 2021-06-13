@@ -27,7 +27,7 @@ Set-Location .\ExploitGuard
 Set-ProcessMitigation -PolicyFilePath InsiderSettings.xml
 
 # Set default blocking level
-Set-MpPreference -CloudBlockLevel 0
+Set-MpPreference -CloudBlockLevel Default
 
 # Allow Windows Defender to submit files without asking
 Set-MpPreference -SubmitSamplesConsent SendAllSamples
