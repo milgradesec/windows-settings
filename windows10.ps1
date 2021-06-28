@@ -813,6 +813,8 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name 
 # Enable process sandbox
 setx /M MP_FORCE_USE_SANDBOX 0
 
+# Block credential stealing from the Windows local security authority subsystem
+Add-MpPreference -AttackSurfaceReductionRules_Ids 9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2 -AttackSurfaceReductionRules_Actions Enabled
 # Block executable content from email client and webmail
 Add-MpPreference -AttackSurfaceReductionRules_Ids BE9BA2D9-53EA-4CDC-84E5-9B1EEEE46550 -AttackSurfaceReductionRules_Actions Enabled
 # Block Adobe Reader from creating child processes
