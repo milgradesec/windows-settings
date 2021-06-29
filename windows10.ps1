@@ -477,7 +477,6 @@ If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters")) {
 }
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters" -Name "LDAPServerIntegrity" -Value 2
 
-Write-Output "Configuring SMB..."
 #########################################
 # Refuse SMB Unencrypted Authenticacion #
 #########################################
