@@ -149,13 +149,16 @@ If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANN
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman" -Name "Enabled" -Value 0
 
 # Disable weak cipher suites
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_GCM_SHA384" | Out-Null
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_GCM_SHA256" | Out-Null
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA256" | Out-Null
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA256" | Out-Null
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA" | Out-Null
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA" | Out-Null
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_3DES_EDE_CBC_SHA" | Out-Null
+try {
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_GCM_SHA384" | Out-Null
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_GCM_SHA256" | Out-Null
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA256" | Out-Null
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA256" | Out-Null
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA" | Out-Null
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA" | Out-Null
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_3DES_EDE_CBC_SHA" | Out-Null   
+}
+catch {}
 
 #####################
 # Internet Settings #
@@ -822,7 +825,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Policies\EarlyLaunch" -Na
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableSmartScreen" -Value 2
 
 # Enable process sandbox
-setx /M MP_FORCE_USE_SANDBOX 0
+setx /M MP_FORCE_USE_SANDBOX 0 | Out-Null
 
 # Block abuse of exploited vulnerable signed drivers
 Add-MpPreference -AttackSurfaceReductionRules_Ids 56a863a9-875e-4185-98a7-b882c64b5ce5 -AttackSurfaceReductionRules_Actions Enabled
@@ -932,6 +935,7 @@ If (!(Get-NetFirewallRule -DisplayName "Bloquear cmd.exe")) {
 #########################
 # Create Scheduled Task #
 #########################
+Write-Output "Registered Scheduled Task."
 $action = New-ScheduledTaskAction `
     -Execute "Powershell.exe" `
     -Argument "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/milgradesec/windows-settings/master/windows10.ps1'))"
@@ -943,4 +947,4 @@ Register-ScheduledTask `
     -Settings (New-ScheduledTaskSettingsSet -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Hours 1)) `
     -User "System" `
     -TaskName "Update System Configuration" `
-    -Description "Applies the github.com/milgradesec/windows-settings custom settings for Windows 10"
+    -Description "Applies the github.com/milgradesec/windows-settings custom settings for Windows 10" | Out-Null
