@@ -309,11 +309,13 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search
 ###################################
 # Disable Cloud Optimized Content #
 ###################################
+Write-Output "Disabling Cloud Optimized Content..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableCloudOptimizedContent" -Value 0
 
 ########################################
 # Disable Advertisements via Bluetooth #
 ########################################
+Write-Output "Disabling Bluetooth Advertising..."
 If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth")) {
     New-Item -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth" -Force | Out-Null
 }
@@ -337,7 +339,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 #####################################################
 # Disable Suggested Apps and Automatic Installation #
 #####################################################
-Write-Output "Disabling Automatic App Instalations..."
+Write-Output "Disabling Automatic Suggested App Instalations..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
     New-Item -Path  "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Force | Out-Null
 }
@@ -351,6 +353,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace" -
 ######################################
 # Disable Message Service Cloud Sync #
 ######################################
+Write-Output "Disabling Cloud Message Sync..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Messaging")) {
     New-Item -Path  "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Messaging" -Force | Out-Null
 }
@@ -359,7 +362,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Messaging" -Na
 #####################################
 # Disable Microsoft Experimentation #
 #####################################
-Write-Output "Disabling Microsoft Experimentation..."
+Write-Output "Disabling Microsoft Device Experimentation..."
 If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\System")) {
     New-Item -Path  "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\System" -Force | Out-Null
 }
@@ -378,6 +381,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name 
 ###########################################################
 # Disable Windows Customer Experience Improvement Program #
 ###########################################################
+Write-Output "Disabling Customer Experience Improvement Program..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows" -Force | Out-Null
 }
@@ -421,6 +425,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name 
 ###################################
 # Restrict Anonymous Users Access #
 ###################################
+Write-Output "Restricting Anonymous Access..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "RestrictAnonymous" -Value 1
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "RestrictAnonymousSAM" -Value 1
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "NoLMHash" -Value 1
@@ -429,16 +434,19 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Par
 #######################################
 # Restrict remote users access tokens #
 #######################################
+Write-Output "Restricting Remote Users Access Tokens..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "LocalAccountTokenFilterPolicy" -Value 0
 
 ##################################
 # Configure RDP Encryption Level #
 ##################################
+Write-Output "Enabling RDP Encryption..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" -Name "MinEncryptionLevel" -Value 3
 
 #############################################
 # Enable NLA (Network Level Authentication) #
 #############################################
+Write-Output "Enabling Network Level Authentication..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" -Force | Out-Null
 }
@@ -458,6 +466,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\K
 #######################################
 # Refuse LM and NTLMv1 Authentication #
 #######################################
+Write-Output "Disabling LM and NTLMv1 Authentication..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LmCompatibilityLevel" -Value 5
 
 #######################################################
@@ -472,17 +481,20 @@ Write-Output "Configuring SMB..."
 #########################################
 # Refuse SMB Unencrypted Authenticacion #
 #########################################
+Write-Output "Disabling SMB Unencrypted Authentication..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Name "EnablePlainTextPassword" -Value 0
 
 #########################
 # Enable SMB Encryption #
 #########################
+Write-Output "Enabling SMB Encryption..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Name "EncryptData" -Value 1
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Name "RejectUnencryptedAccess" -Value 1
 
 ##################################
 # Disable WDigest Authentication #
 ##################################
+Write-Output "Disabling WDigest Authentication..."
 If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest")) {
     New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest" -Force | Out-Null
 }
@@ -848,7 +860,6 @@ Add-MpPreference -AttackSurfaceReductionRules_Ids 01443614-CD74-433A-B99E-2ECDC0
 # Exploit Guard #
 #################
 Write-Output "Configuring Windows Exploit Guard..."
-#reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\example.exe" /f
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/milgradesec/windows-settings/master/ExploitGuard/ExploitSettings.xml" -OutFile "$Env:TEMP\ExploitSettings.xml"
 Set-ProcessMitigation -PolicyFilePath "$Env:TEMP\ExploitSettings.xml"
 
