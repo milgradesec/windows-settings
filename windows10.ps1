@@ -827,6 +827,8 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name 
 # Enable process sandbox
 setx /M MP_FORCE_USE_SANDBOX 0 | Out-Null
 
+# Block credential stealing from the Windows local security authority subsystem
+Add-MpPreference -AttackSurfaceReductionRules_Ids 9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2 -AttackSurfaceReductionRules_Actions Enabled
 # Block abuse of exploited vulnerable signed drivers
 Add-MpPreference -AttackSurfaceReductionRules_Ids 56a863a9-875e-4185-98a7-b882c64b5ce5 -AttackSurfaceReductionRules_Actions Enabled
 # Block executable content from email client and webmail
