@@ -149,13 +149,16 @@ If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANN
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman" -Name "Enabled" -Value 0
 
 # Disable weak cipher suites
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_GCM_SHA384" | Out-Null
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_GCM_SHA256" | Out-Null
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA256" | Out-Null
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA256" | Out-Null
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA" | Out-Null
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA" | Out-Null
-Disable-TlsCipherSuite -Name "TLS_RSA_WITH_3DES_EDE_CBC_SHA" | Out-Null
+try {
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_GCM_SHA384" | Out-Null
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_GCM_SHA256" | Out-Null
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA256" | Out-Null
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA256" | Out-Null
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA" | Out-Null
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA" | Out-Null
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_3DES_EDE_CBC_SHA" | Out-Null   
+}
+catch {}
 
 #####################
 # Internet Settings #
@@ -309,11 +312,13 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search
 ###################################
 # Disable Cloud Optimized Content #
 ###################################
+Write-Output "Disabling Cloud Optimized Content..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableCloudOptimizedContent" -Value 0
 
 ########################################
 # Disable Advertisements via Bluetooth #
 ########################################
+Write-Output "Disabling Bluetooth Advertising..."
 If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth")) {
     New-Item -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth" -Force | Out-Null
 }
@@ -337,11 +342,11 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 #####################################################
 # Disable Suggested Apps and Automatic Installation #
 #####################################################
-Write-Output "Disabling Automatic App Instalations..."
-If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
-    New-Item -Path  "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Force | Out-Null
-}
-Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableWindowsConsumerFeatures"
+Write-Output "Disabling Automatic Suggested App Instalations..."
+# If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
+#     New-Item -Path  "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Force | Out-Null
+# }
+# #Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableWindowsConsumerFeatures"
 
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace" -Force | Out-Null
@@ -351,6 +356,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace" -
 ######################################
 # Disable Message Service Cloud Sync #
 ######################################
+Write-Output "Disabling Cloud Message Sync..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Messaging")) {
     New-Item -Path  "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Messaging" -Force | Out-Null
 }
@@ -359,7 +365,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Messaging" -Na
 #####################################
 # Disable Microsoft Experimentation #
 #####################################
-Write-Output "Disabling Microsoft Experimentation..."
+Write-Output "Disabling Microsoft Device Experimentation..."
 If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\System")) {
     New-Item -Path  "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\System" -Force | Out-Null
 }
@@ -378,6 +384,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name 
 ###########################################################
 # Disable Windows Customer Experience Improvement Program #
 ###########################################################
+Write-Output "Disabling Customer Experience Improvement Program..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows" -Force | Out-Null
 }
@@ -421,6 +428,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name 
 ###################################
 # Restrict Anonymous Users Access #
 ###################################
+Write-Output "Restricting Anonymous Access..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "RestrictAnonymous" -Value 1
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "RestrictAnonymousSAM" -Value 1
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "NoLMHash" -Value 1
@@ -429,16 +437,19 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Par
 #######################################
 # Restrict remote users access tokens #
 #######################################
+Write-Output "Restricting Remote Users Access Tokens..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "LocalAccountTokenFilterPolicy" -Value 0
 
 ##################################
 # Configure RDP Encryption Level #
 ##################################
+Write-Output "Enabling RDP Encryption..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" -Name "MinEncryptionLevel" -Value 3
 
 #############################################
 # Enable NLA (Network Level Authentication) #
 #############################################
+Write-Output "Enabling Network Level Authentication..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" -Force | Out-Null
 }
@@ -458,6 +469,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\K
 #######################################
 # Refuse LM and NTLMv1 Authentication #
 #######################################
+Write-Output "Disabling LM and NTLMv1 Authentication..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LmCompatibilityLevel" -Value 5
 
 #######################################################
@@ -468,21 +480,23 @@ If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters")) {
 }
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters" -Name "LDAPServerIntegrity" -Value 2
 
-Write-Output "Configuring SMB..."
 #########################################
 # Refuse SMB Unencrypted Authenticacion #
 #########################################
+Write-Output "Disabling SMB Unencrypted Authentication..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Name "EnablePlainTextPassword" -Value 0
 
 #########################
 # Enable SMB Encryption #
 #########################
+Write-Output "Enabling SMB Encryption..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Name "EncryptData" -Value 1
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Name "RejectUnencryptedAccess" -Value 1
 
 ##################################
 # Disable WDigest Authentication #
 ##################################
+Write-Output "Disabling WDigest Authentication..."
 If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest")) {
     New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest" -Force | Out-Null
 }
@@ -811,10 +825,12 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Policies\EarlyLaunch" -Na
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableSmartScreen" -Value 2
 
 # Enable process sandbox
-setx /M MP_FORCE_USE_SANDBOX 0
+setx /M MP_FORCE_USE_SANDBOX 0 | Out-Null
 
 # Block credential stealing from the Windows local security authority subsystem
 Add-MpPreference -AttackSurfaceReductionRules_Ids 9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2 -AttackSurfaceReductionRules_Actions Enabled
+# Block abuse of exploited vulnerable signed drivers
+Add-MpPreference -AttackSurfaceReductionRules_Ids 56a863a9-875e-4185-98a7-b882c64b5ce5 -AttackSurfaceReductionRules_Actions Enabled
 # Block executable content from email client and webmail
 Add-MpPreference -AttackSurfaceReductionRules_Ids BE9BA2D9-53EA-4CDC-84E5-9B1EEEE46550 -AttackSurfaceReductionRules_Actions Enabled
 # Block Adobe Reader from creating child processes
@@ -848,7 +864,6 @@ Add-MpPreference -AttackSurfaceReductionRules_Ids 01443614-CD74-433A-B99E-2ECDC0
 # Exploit Guard #
 #################
 Write-Output "Configuring Windows Exploit Guard..."
-#reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\example.exe" /f
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/milgradesec/windows-settings/master/ExploitGuard/ExploitSettings.xml" -OutFile "$Env:TEMP\ExploitSettings.xml"
 Set-ProcessMitigation -PolicyFilePath "$Env:TEMP\ExploitSettings.xml"
 
@@ -922,6 +937,7 @@ If (!(Get-NetFirewallRule -DisplayName "Bloquear cmd.exe")) {
 #########################
 # Create Scheduled Task #
 #########################
+Write-Output "Registered Scheduled Task."
 $action = New-ScheduledTaskAction `
     -Execute "Powershell.exe" `
     -Argument "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/milgradesec/windows-settings/master/windows10.ps1'))"
@@ -933,11 +949,4 @@ Register-ScheduledTask `
     -Settings (New-ScheduledTaskSettingsSet -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Hours 1)) `
     -User "System" `
     -TaskName "Update System Configuration" `
-    -Description "Applies the github.com/milgradesec/windows-settings custom settings for Windows 10"
-
-##################
-# Remove Krypton #
-##################
-Remove-Item "C:/Program Files/Krypton" -Recurse -Force
-Unregister-ScheduledTask -TaskName "KryptonUpdate" -Confirm:$false
-Unregister-ScheduledTask -TaskName "KryptonUpgrade" -Confirm:$false
+    -Description "Applies the github.com/milgradesec/windows-settings custom settings for Windows 10" | Out-Null
