@@ -6,18 +6,14 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     Exit
 }
 
-########################################################
-# Disable LLMNR (Link-Local Multicast Name Resolution) #
-########################################################
+# Disable LLMNR (Link-Local Multicast Name Resolution)
 Write-Output "Disabling Link-Local Multicast Name Resolution..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" -Force | Out-Null
 }
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" -Name "EnableMulticast" -Value 0
 
-############################
-# Disable NetBIOS Protocol #
-############################
+# Disable NetBIOS Protocol
 Write-Output "Disabling NetBIOS Protocol..."
 $path = 'HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces'
 $name = 'NetbiosOptions'
@@ -26,34 +22,26 @@ Get-ChildItem -Path $path -Recurse | Where-Object { $_.GetValue($name) -ne $valu
     Set-ItemProperty -Path ('{0}\{1}' -f $path, $_.PSChildName) -Name $name -Value $value 
 }
 
-###################################################
-# Disable Web Proxy Autodiscovery Protocol (WPAD) #
-###################################################
+# Disable Web Proxy Autodiscovery Protocol (WPAD)
 Write-Output "Disabling Web Proxy Autodiscovery Protocol..."
 If (Test-Path "HKLM:\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc") {
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\WinHttpAutoProxySvc" -Name "Start" -Value 0
 }
 
-##########################
-# Disable SMBv1 Protocol #
-##########################
+# Disable SMBv1 Protocol
 Write-Output "Disabling SMBv1 Protocol..."
 Start-Job -ScriptBlock {
     Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'SMB1Protocol' -ErrorAction SilentlyContinue
 } | Out-Null
 
-########################
-# Disable PowerShellv2 #
-########################
+# Disable PowerShellv2
 Write-Output "Disabling PowerShellV2..."
 Start-Job -ScriptBlock {
     Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'MicrosoftWindowsPowerShellV2' -ErrorAction SilentlyContinue
     Disable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'MicrosoftWindowsPowerShellV2Root' -ErrorAction SilentlyContinue
 } | Out-Null
 
-#############################
-# Disable Internet Explorer #
-#############################
+# Disable Internet Explorer
 Write-Output "Disabling Internet Explorer..."
 Start-Job -ScriptBlock {
     if ([Environment]::Is64BitProcess) {
@@ -64,33 +52,25 @@ Start-Job -ScriptBlock {
     }
 } | Out-Null
 
-############################
-# Enable ssh-agent Service #
-############################
+# Enable ssh-agent Service
 Write-Output "Enabling SSH Agent Service..."
 Set-Service -Name ssh-agent -StartupType Automatic
 Start-Service -Name ssh-agent
 
-###########################
-# Disable NTVDM Subsystem #
-###########################
+# Disable NTVDM Subsystem
 Write-Output "Disabling NTVDM Subsystem..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Force | Out-Null
 }
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Name "VDMDisallowed" -Value 1
 
-##########################
-# Configure TCP/IP Stack #
-##########################
+# Configure TCP/IP Stack
 Write-Output "Configuring TCP/IP Stack..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "SynAttackProtect" -Value 1
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "DisableIPSourceRouting" -Value 2
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" -Name "DisableIPSourceRouting" -Value 2
 
-######################
-# Configure SChannel #
-######################
+# Configure TLS
 Write-Output "Configuring SChannel..."
 # Enable TLS 1.2
 If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client")) {
@@ -160,9 +140,7 @@ try {
 }
 catch {}
 
-#####################
-# Internet Settings #
-#####################
+# Internet Settings
 Write-Output "Configuring Internet Settings..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" -Force | Out-Null
@@ -173,9 +151,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main
 # Allow TLS 1.2, TLS 1.3
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings" -Name "SecureProtocols" -Value 10240
 
-#############################
-# Enable .Net Strong Crypto #
-#############################
+# Enable .Net Strong Crypto
 Write-Output "Enabling .NET Strong Crypto"
 # .NET Framework 4
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -Name "SystemDefaultTlsVersions" -Value 1
@@ -189,9 +165,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v2.0.50727" -Name
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v2.0.50727" -Name "SystemDefaultTlsVersions" -Value 1
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v2.0.50727" -Name "SchUseStrongCrypto" -Value 1
 
-################################
-# Disable AutoRun and Autoplay #
-################################
+# Disable AutoRun and Autoplay
 Write-Output "Disabling AutoRun..."
 If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer")) {
     New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Force | Out-Null
@@ -204,18 +178,14 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
 }
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "NoAutoplayfornonVolume" -Value 1
 
-##################################
-# Disable Windows Scripting Host #
-##################################
+# Disable Windows Scripting Host
 Write-Output "Disabling Windows Scripting Host..."
 If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings")) {
     New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings" -Force | Out-Null
 }
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings" -Name "Enabled" -Value 0
 
-##########################
-# Disable Advertising ID #
-##########################
+# Disable Advertising ID
 Write-Output "Disabling Advertising ID..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" -Force | Out-Null
