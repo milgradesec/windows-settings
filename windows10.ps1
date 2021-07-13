@@ -746,7 +746,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Policies\EarlyLaunch" -Na
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableSmartScreen" -Value 2
 
 # Enable process sandbox
-setx /M MP_FORCE_USE_SANDBOX 0 | Out-Null
+setx /M MP_FORCE_USE_SANDBOX 1 | Out-Null
 
 # Block credential stealing from the Windows local security authority subsystem
 Add-MpPreference -AttackSurfaceReductionRules_Ids 9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2 -AttackSurfaceReductionRules_Actions Enabled
