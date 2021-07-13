@@ -350,9 +350,7 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat")) {
 }
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Name "DisableInventory" -Value 1
 
-#################################
-# Disable User Activity History #
-#################################
+# Disable User Activity History
 Write-Output "Disabling Activity History..."
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" )) {
     New-Item -Path  "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"  -Force | Out-Null
@@ -361,24 +359,18 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "PublishUserActivities" -Value 0
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "UploadUserActivities" -Value 0
 
-###################################
-# Restrict Anonymous Users Access #
-###################################
+# Restrict Anonymous Users Access
 Write-Output "Restricting Anonymous Access..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "RestrictAnonymous" -Value 1
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "RestrictAnonymousSAM" -Value 1
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "NoLMHash" -Value 1
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Name "RestrictNullSessAccess" -Value 1
 
-#######################################
-# Restrict remote users access tokens #
-#######################################
+# Restrict remote users access tokens
 Write-Output "Restricting Remote Users Access Tokens..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "LocalAccountTokenFilterPolicy" -Value 0
 
-##################################
-# Configure RDP Encryption Level #
-##################################
+# Configure RDP Encryption Level
 Write-Output "Enabling RDP Encryption..."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" -Name "MinEncryptionLevel" -Value 3
 
@@ -396,29 +388,21 @@ If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStati
 }
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "UserAuthentication" -Value 1
 
-################
-# Enable SEHOP #
-################
+# Enable SEHOP
 Write-Output "Enabling SEHOP..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" -Name "DisableExceptionChainValidation" -Value 0
 
-#######################################
-# Refuse LM and NTLMv1 Authentication #
-#######################################
+# Refuse LM and NTLMv1 Authentication
 Write-Output "Disabling LM and NTLMv1 Authentication..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LmCompatibilityLevel" -Value 5
 
-#######################################################
-# Requerir comprobacion de integridad al trafico LDAP #
-#######################################################
+# Requerir comprobacion de integridad al trafico LDAP
 If (!(Test-Path "HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters")) {
     New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters" -Force | Out-Null
 }
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters" -Name "LDAPServerIntegrity" -Value 2
 
-#########################################
-# Refuse SMB Unencrypted Authenticacion #
-#########################################
+# Refuse SMB Unencrypted Authenticacion
 Write-Output "Disabling SMB Unencrypted Authentication..."
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Name "EnablePlainTextPassword" -Value 0
 
