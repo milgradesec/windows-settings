@@ -521,8 +521,8 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "BlockThir
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "DefaultPopupsSetting" -Value 2
 
 # Enable SmartScreen
-New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\PhishingFilter" -Force | Out-Null
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\PhishingFilter" -Name "EnabledV9" -Value 1
+Remove-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\PhishingFilter" -Force | Out-Null
+#Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\PhishingFilter" -Name "EnabledV9" -Value 1
 
 # Block insecure content
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "DefaultInsecureContentSetting" -Value 2
