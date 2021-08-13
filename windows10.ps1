@@ -508,6 +508,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\TLSCipherSuiteDen
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\TLSCipherSuiteDenyList" -Name "5" -Value "0xc014"
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\TLSCipherSuiteDenyList" -Name "6" -Value "0xc013"
 
+# Enable TLS Post-Quantum Key-Agreement
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "CECPQ2Enabled" -Value 1
+
 # Enable tracking prevention
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "TrackingPrevention" -Value 3
 
@@ -575,6 +578,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DnsOverHtt
 # Configure TLS
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "SSLVersionMin" -Value "tls1.2"
 
+# Enable TLS Post-Quantum Key-Agreement
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "CECPQ2Enabled" -Value 1
+
 # Block third-party cookies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "BlockThirdPartyCookies" -Value 1
 
@@ -624,6 +630,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "DnsO
 
 # Configure TLS
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "SSLVersionMin" -Value "tls1.2"
+
+# Enable TLS Post-Quantum Key-Agreement
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "CECPQ2Enabled" -Value 1
 
 # Block third-party cookies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "BlockThirdPartyCookies" -Value 1
