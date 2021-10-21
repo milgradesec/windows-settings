@@ -639,12 +639,6 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist
 # Ublock Origin
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist" -Name "1" -Value "cjpalhdlnbpafiamejdnhcphjbkeiagm"
 
-# Deprecated
-Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "SafeBrowsingEnabled"
-Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "ChromeCleanupEnabled"
-Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "ChromeCleanupReportingEnabled"
-Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DefaultPluginsSetting"
-
 #################
 # Brave Browser #
 #################
@@ -916,3 +910,15 @@ Register-ScheduledTask `
     -User "System" `
     -TaskName "Update System Configuration" `
     -Description "Applies the github.com/milgradesec/windows-settings custom settings for Windows 10" | Out-Null
+
+
+
+########################
+# REMOVED / DEPRECATED #
+########################
+Start-Job -ScriptBlock {
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "SafeBrowsingEnabled"
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "ChromeCleanupEnabled"
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "ChromeCleanupReportingEnabled"
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DefaultPluginsSetting"
+} | Out-Null
