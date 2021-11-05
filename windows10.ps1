@@ -898,6 +898,11 @@ If (!(Get-NetFirewallRule -DisplayName "Bloquear cmd.exe")) {
     New-NetFirewallRule -DisplayName "Bloquear cmd.exe"  -Direction Outbound -Program "C:\WINDOWS\SysWOW64\cmd.exe" -Action Block | Out-Null
 }
 
+############################
+# Configure DNS over HTTPS #
+############################
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" -Name "DoHPolicy" -Value 2
+
 #########################
 # Create Scheduled Task #
 #########################
