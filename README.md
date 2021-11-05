@@ -18,3 +18,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 - <https://github.com/simeononsecurity/Windows-Optimize-Harden-Debloat>
 - <https://gist.github.com/alirobe/7f3b34ad89a159e6daa1>
 - <https://gist.github.com/chuckwagoncomputing/24f968083292361d7a8bafba0bbf371d>
+
+## License
+
+GNU General Public License v3.0
