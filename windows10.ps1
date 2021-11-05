@@ -901,7 +901,12 @@ If (!(Get-NetFirewallRule -DisplayName "Bloquear cmd.exe")) {
 ############################
 # Configure DNS over HTTPS #
 ############################
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" -Name "DoHPolicy" -Value 2
+If (!(Test-RegistryValue -Path "HKLM:\SOFTWARE\milgradesec" -Value "DoNotChangeDNS")) {
+    Get-NetAdapter  -Name "Ethernet*" | Set-DnsClientServerAddress -ServerAddresses "1.1.1.1", "1.0.0.1"
+    Get-NetAdapter  -Name "Wifi*" | Set-DnsClientServerAddress -ServerAddresses "1.1.1.1", "1.0.0.1"
+
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" -Name "DoHPolicy" -Value 2
+}
 
 #########################
 # Create Scheduled Task #
