@@ -828,7 +828,9 @@ Add-MpPreference -AttackSurfaceReductionRules_Ids 01443614-CD74-433A-B99E-2ECDC0
 # Exploit Guard #
 #################
 Write-Output "Configuring Windows Exploit Guard..."
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/milgradesec/windows-settings/master/ExploitGuard/ExploitSettings.xml" -OutFile "$Env:TEMP\ExploitSettings.xml"
+Invoke-WebRequest `
+    -Uri "https://raw.githubusercontent.com/milgradesec/windows-settings/master/ExploitGuard/ExploitSettings.xml" `
+    -OutFile "$Env:TEMP\ExploitSettings.xml"
 Set-ProcessMitigation -PolicyFilePath "$Env:TEMP\ExploitSettings.xml"
 
 ##############################
