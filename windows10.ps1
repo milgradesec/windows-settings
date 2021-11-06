@@ -18,8 +18,8 @@ Write-Output "Disabling NetBIOS Protocol..."
 $path = 'HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces'
 $name = 'NetbiosOptions'
 $value = 2
-Get-ChildItem -Path $path -Recurse | Where-Object { $_.GetValue($name) -ne $value } | ForEach-Object { 
-    Set-ItemProperty -Path ('{0}\{1}' -f $path, $_.PSChildName) -Name $name -Value $value 
+Get-ChildItem -Path $path -Recurse | Where-Object { $_.GetValue($name) -ne $value } | ForEach-Object {
+    Set-ItemProperty -Path ('{0}\{1}' -f $path, $_.PSChildName) -Name $name -Value $value
 }
 
 # Disable Web Proxy Autodiscovery Protocol (WPAD)
@@ -136,7 +136,7 @@ try {
     Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA256" | Out-Null
     Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_256_CBC_SHA" | Out-Null
     Disable-TlsCipherSuite -Name "TLS_RSA_WITH_AES_128_CBC_SHA" | Out-Null
-    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_3DES_EDE_CBC_SHA" | Out-Null   
+    Disable-TlsCipherSuite -Name "TLS_RSA_WITH_3DES_EDE_CBC_SHA" | Out-Null
 }
 catch {}
 
