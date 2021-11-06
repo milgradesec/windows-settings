@@ -787,6 +787,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Policies\EarlyLaunch" -Na
 
 # Configure SmartScreen
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableSmartScreen" -Value 2
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "ShellSmartScreenLevel" -Value "Warn"
 
 # Enable process sandbox
 setx /M MP_FORCE_USE_SANDBOX 1 | Out-Null
