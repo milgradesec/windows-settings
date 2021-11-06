@@ -1,0 +1,16 @@
+name: Minify
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  minify:
+    name: Minify Powershell
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: PSMinifier
+        uses: StartAutomating/PSMinifier@v1.1
+        with:
+          CommitMessage: "Minifying $($_.Name)"
