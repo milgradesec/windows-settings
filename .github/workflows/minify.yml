@@ -13,4 +13,5 @@ jobs:
       - name: PSMinifier
         uses: StartAutomating/PSMinifier@v1.1
         with:
+          Include: "windows10.ps1"
           CommitMessage: "Minifying $($_.Name)"
