@@ -925,8 +925,6 @@ Register-ScheduledTask `
     -TaskName "Update System Configuration" `
     -Description "Applies the github.com/milgradesec/windows-settings custom settings for Windows 10" | Out-Null
 
-
-
 ########################
 # REMOVED / DEPRECATED #
 ########################
