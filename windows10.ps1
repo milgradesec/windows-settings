@@ -923,7 +923,7 @@ Register-ScheduledTask `
     -Settings (New-ScheduledTaskSettingsSet -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Hours 1)) `
     -User "System" `
     -TaskName "Update System Configuration" `
-    -Description "Applies the github.com/milgradesec/windows-settings custom settings for Windows 10" | Out-Null
+    -Description "Applies the github.com/milgradesec/windows-settings custom settings for Windows" | Out-Null
 
 ########################
 # REMOVED / DEPRECATED #
