@@ -638,6 +638,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "AudioSandb
 # Reject third party code
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "ThirdPartyBlockingEnabled" -Value 1
 
+# Disable URL-keyed anonymized data collection
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "UrlKeyedAnonymizedDataCollectionEnabled" -Value 0
+
 # Disable disk cache
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DiskCacheDir" -Value "null"
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DiskCacheSize" -Value 1
