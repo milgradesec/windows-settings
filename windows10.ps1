@@ -545,6 +545,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "DefaultPo
 # Block insecure content
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "DefaultInsecureContentSetting" -Value 2
 
+# Enable typosquatting protection
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "TyposquattingCheckerEnabled" -Value 1
+
 # Set authentication schemes
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "AuthSchemes" -Value "ntlm,negotiate"
 
@@ -553,6 +556,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "SitePerPr
 
 # Enable Audio process sandbox
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "AudioSandboxEnabled" -Value 1
+
+# Run renderer in an app container (sandboxing)
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "RendererAppContainerEnabled" -Value 1
 
 # Block code injection from legacy third party applications
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "BrowserLegacyExtensionPointsBlockingEnabled" -Value 1
