@@ -6,7 +6,7 @@
 
 This project is divided into two main files.
 
-`windows10.ps1`, a powershell script to configure many Windows 10/11 system settings and some third-party software for increased privacy and security.
+`windows10.ps1`, a powershell script to configure Windows 10/11 system settings and some third-party software for increased privacy and security.
 
 `ExploitGuard/ExploitSettings.xml`, contains settings with aditional exploit mitigations for many system services and third-party software.
 
