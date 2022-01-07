@@ -561,6 +561,10 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "AudioSand
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "RendererAppContainerEnabled" -Value 1
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "RendererCodeIntegrityEnabled" -Value 1
 
+# Hardware-enforced Stack Protection 
+# After a crash disable Hardware-enforced Stack Protection until the next Microsoft Edge update
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "ShadowStackCrashRollbackBehavior" -Value 1
+
 # Block code injection from legacy third party applications
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "BrowserLegacyExtensionPointsBlockingEnabled" -Value 1
 
