@@ -661,6 +661,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DiskCacheS
 # Disable basic auth over http
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "BasicAuthOverHttpEnabled" -Value 0
 
+# Enable sandbox for network service
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "NetworkServiceSandboxEnabled" -Value 1
+
 # Extensions
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist" -Force | Out-Null
