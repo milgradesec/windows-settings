@@ -717,6 +717,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "Disk
 # Disable basic auth over http
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "BasicAuthOverHttpEnabled" -Value 0
 
+# Enable sandbox for network service
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "NetworkServiceSandboxEnabled" -Value 1
+
 # Extensions
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallForcelist")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallForcelist" -Force | Out-Null
