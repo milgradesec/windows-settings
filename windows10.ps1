@@ -803,7 +803,7 @@ Set-ItemProperty -Path "HKLM:\Software\Policies\Zoom\Zoom Meetings\General" -Nam
 ##################
 # NVIDIA Geforce #
 ##################
-# Disable crash-reporting tasks
+# Disable crash-reporting scheduled tasks
 Get-ScheduledTask -TaskName "NvTmRep_CrashReport*" | Disable-ScheduledTask
 
 ####################
