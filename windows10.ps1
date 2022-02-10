@@ -561,7 +561,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "AudioSand
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "RendererAppContainerEnabled" -Value 1
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "RendererCodeIntegrityEnabled" -Value 1
 
-# Security enhanced mode
+# Enable 'Enhanced Security Mode'
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "EnhanceSecurityMode" -Value 1
 
 # Hardware-enforced Stack Protection 
