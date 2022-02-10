@@ -749,8 +749,8 @@ Set-ItemProperty -Path "HKLM:\Software\Policies\Zoom\Zoom Meetings\General" -Nam
 ############################
 Get-ScheduledTask -TaskName "NvTmRep_CrashReport*" | Disable-ScheduledTask
 
-New-Item -Path "HKLM:\Software\NVIDIA Corporation\NvControlPanel2\Client" -Force | Out-Null
-Set-ItemProperty -Path "HKLM:\Software\NVIDIA Corporation\NvControlPanel2\Client" -Name "OptInOrOutPreference" -Value 0
+#New-Item -Path "HKLM:\Software\NVIDIA Corporation\NvControlPanel2\Client" -Force | Out-Null
+#Set-ItemProperty -Path "HKLM:\Software\NVIDIA Corporation\NvControlPanel2\Client" -Name "OptInOrOutPreference" -Value 0
 
 #Set-ItemProperty -Path "HKLM:\Software\NVIDIA Corporation\Global\FTS" -Name EnableRID44231 -Value 0
 #Set-ItemProperty -Path "HKLM:\Software\NVIDIA Corporation\Global\FTS" -Name EnableRID64640 -Value 0
