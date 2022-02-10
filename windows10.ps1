@@ -800,6 +800,12 @@ If (!(Test-Path "HKLM:\Software\Policies\Zoom\Zoom Meetings\General")) {
 }
 Set-ItemProperty -Path "HKLM:\Software\Policies\Zoom\Zoom Meetings\General" -Name "BlockUntrustedSSLCert" -Value 1
 
+##################
+# NVIDIA Geforce #
+##################
+# Disable crash-reporting tasks
+Get-ScheduledTask -TaskName "NvTmRep_CrashReport*" | Disable-ScheduledTask
+
 ####################
 # Windows Defender #
 ####################
