@@ -567,6 +567,13 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "RendererC
 # Enable 'Enhanced Security Mode'
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "EnhanceSecurityMode" -Value 1
 
+# Exclude incompatible websites from enhanced security mode
+If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\EnhanceSecurityModeBypassListDomains")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\EnhanceSecurityModeBypassListDomains" -Force | Out-Null
+}
+# Whatsapp Web needs WebAssembly to work
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\EnhanceSecurityModeBypassListDomains" -Name "1" -Value "web.whatsapp.com"
+
 # Hardware-enforced Stack Protection 
 # After a crash disable Hardware-enforced Stack Protection until the next Microsoft Edge update
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "ShadowStackCrashRollbackBehavior" -Value 1
