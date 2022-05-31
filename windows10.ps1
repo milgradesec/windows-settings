@@ -560,6 +560,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "SitePerPr
 # Enable Audio process sandbox
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "AudioSandboxEnabled" -Value 1
 
+# Enable Network process sandbox
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "NetworkServiceSandboxEnabled" -Value 1
+
 # Renderer process hardening
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "RendererAppContainerEnabled" -Value 1
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "RendererCodeIntegrityEnabled" -Value 1
