@@ -568,7 +568,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "RendererA
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "RendererCodeIntegrityEnabled" -Value 1
 
 # Enable 'Enhanced Security Mode'
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "EnhanceSecurityMode" -Value 1
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "EnhanceSecurityMode" -Value 2
 
 # Exclude incompatible websites from enhanced security mode
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\EnhanceSecurityModeBypassListDomains")) {
