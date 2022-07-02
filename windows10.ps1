@@ -837,6 +837,7 @@ Get-ScheduledTask -TaskName "NvTmRep_CrashReport*" | Disable-ScheduledTask
 Write-Output "Configuring Windows Defender..."
 Set-MpPreference -PUAProtection Enabled
 Set-MpPreference -CloudBlockLevel Default
+Set-MpPreference -MAPSReporting Advanced
 Set-MpPreference -SubmitSamplesConsent SendSafeSamples
 Set-MpPreference -CloudExtendedTimeout 50
 Set-MpPreference -SignatureUpdateInterval 8
