@@ -596,6 +596,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "EdgeShopp
 # Disable Travel Assistant
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "TravelAssistanceEnabled" -Value 0
 
+# Disable web service for navigation errors
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "ResolveNavigationErrorsUseWebService" -Value 0
+
 # Disable Internet Explorer integration
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "InternetExplorerIntegrationLevel" -Value 0
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "InternetExplorerModeToolbarButtonEnabled" -Value 0
