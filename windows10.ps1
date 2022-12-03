@@ -692,6 +692,10 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "BasicAuthO
 # Enable sandbox for network service
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "NetworkServiceSandboxEnabled" -Value 1
 
+# Renderer process hardening
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "RendererAppContainerEnabled" -Value 1
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "RendererCodeIntegrityEnabled" -Value 1
+
 # Extensions
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist" -Force | Out-Null
@@ -747,6 +751,10 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "Basi
 
 # Enable sandbox for network service
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "NetworkServiceSandboxEnabled" -Value 1
+
+# Renderer process hardening
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "RendererAppContainerEnabled" -Value 1
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "RendererCodeIntegrityEnabled" -Value 1
 
 # Extensions
 If (!(Test-Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallForcelist")) {
