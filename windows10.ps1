@@ -512,7 +512,7 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Force | Out-Null
 }
 # Enable DNS over HTTPS
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "DnsOverHttpsMode" -Value "secure"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "DnsOverHttpsMode" -Value "automatic"
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "DnsOverHttpsTemplates" -Value "https://dns.paesa.es/dns-query{?dns}"
 
 # Configure TLS
@@ -644,7 +644,7 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Google\Chrome")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Force | Out-Null
 }
 # Enable DNS over HTTPS
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DnsOverHttpsMode" -Value "secure"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DnsOverHttpsMode" -Value "automatic"
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DnsOverHttpsTemplates" -Value "https://dns.paesa.es/dns-query{?dns}"
 
 # Configure TLS
@@ -710,7 +710,7 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Force | Out-Null
 }
 # Enable DNS over HTTPS
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "DnsOverHttpsMode" -Value "secure"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "DnsOverHttpsMode" -Value "automatic"
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "DnsOverHttpsTemplates" -Value "https://dns.paesa.es/dns-query{?dns}"
 
 # Configure TLS
