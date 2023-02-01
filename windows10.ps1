@@ -636,6 +636,12 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelis
 # Ublock Origin
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist" -Name "1" -Value "odfafepnkmbhccpbejgmiehpchacaeak"
 
+If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallBlocklist")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallBlocklist" -Force | Out-Null
+}
+# Adobe Acrobat PDF
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallBlocklist" -Name "1" -Value "efaidnbmnnnibpcajpcglclefindmkaj"
+
 #################
 # Google Chrome #
 #################
@@ -702,6 +708,12 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist
 # Ublock Origin
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist" -Name "1" -Value "cjpalhdlnbpafiamejdnhcphjbkeiagm"
 
+If (!(Test-Path "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallBlocklist")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallBlocklist" -Force | Out-Null
+}
+# Adobe Acrobat PDF
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome\ExtensionInstallBlocklist" -Name "1" -Value "efaidnbmnnnibpcajpcglclefindmkaj"
+
 #################
 # Brave Browser #
 #################
@@ -761,6 +773,12 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallFor
 }
 # Ublock Origin
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallForcelist" -Name "1" -Value "cjpalhdlnbpafiamejdnhcphjbkeiagm"
+
+If (!(Test-Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallBlocklist")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallBlocklist" -Force | Out-Null
+}
+# Adobe Acrobat PDF
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallBlocklist" -Name "1" -Value "efaidnbmnnnibpcajpcglclefindmkaj"
 
 ###################
 # Mozilla Firefox #
