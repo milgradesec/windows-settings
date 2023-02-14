@@ -580,10 +580,6 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\EnhanceSecurityModeBypas
 # Whatsapp Web needs WebAssembly to work
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge\EnhanceSecurityModeBypassListDomains" -Name "1" -Value "web.whatsapp.com"
 
-# Hardware-enforced Stack Protection 
-# After a crash disable Hardware-enforced Stack Protection until the next Microsoft Edge update
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "ShadowStackCrashRollbackBehavior" -Value 1
-
 # Block code injection from legacy third party applications
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "BrowserLegacyExtensionPointsBlockingEnabled" -Value 1
 
@@ -1024,4 +1020,5 @@ Start-Job -ScriptBlock {
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "SendSiteInfoToImproveServices"
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "TravelAssistanceEnabled"
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "EdgeDiscoverEnabled"
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "ShadowStackCrashRollbackBehavior"
 } | Out-Null
