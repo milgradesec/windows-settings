@@ -683,6 +683,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "ThirdParty
 # Disable URL-Keyed anonymized data collection
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "UrlKeyedAnonymizedDataCollectionEnabled" -Value 0
 
+# Disable domain reliability diagnostic data reporting
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DomainReliabilityAllowed" -Value 0
+
 # Disable disk cache
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DiskCacheDir" -Value "null"
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DiskCacheSize" -Value 1
