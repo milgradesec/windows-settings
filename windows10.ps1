@@ -730,6 +730,12 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "SSLV
 # Enable TLS Post-Quantum Key-Agreement
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "CECPQ2Enabled" -Value 1
 
+# Enable TLS Encrypted Client Hello
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "EncryptedClientHelloEnabled" -Value 1
+
+# Configure HTTPS-Only Mode
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "HttpsOnlyMode" -Value "allowed"
+
 # Block third-party cookies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "BlockThirdPartyCookies" -Value 1
 
