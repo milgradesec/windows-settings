@@ -658,6 +658,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "HttpsOnlyM
 # Enable TLS Post-Quantum Key-Agreement
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "CECPQ2Enabled" -Value 1
 
+# Enable Safe Browsing at the StandardProtection level
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "SafeBrowsingProtectionLevel" -Value 1
+
 # Block third-party cookies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "BlockThirdPartyCookies" -Value 1
 
@@ -738,6 +741,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "Http
 
 # Block third-party cookies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "BlockThirdPartyCookies" -Value 1
+
+# Enable Safe Browsing at the StandardProtection level
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "SafeBrowsingProtectionLevel" -Value 1
 
 # Block popups
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "DefaultPopupsSetting" -Value 2
