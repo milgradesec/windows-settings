@@ -1036,4 +1036,7 @@ Start-Job -ScriptBlock {
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "ShadowStackCrashRollbackBehavior"
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "CECPQ2Enabled"
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "CECPQ2Enabled"
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\BraveSoftware\Brave" -Name "RendererCodeIntegrityEnabled"
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "RendererCodeIntegrityEnabled"
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name "RendererCodeIntegrityEnabled"
 } | Out-Null
